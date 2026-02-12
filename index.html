@@ -94,7 +94,7 @@
         </h1>
         <h2 class="text-secondary m-0 small-text"><a href="https://nerdtech.one" target="_blank" class=" text-decoration-none">by NerdTech</a></h2><!-- gray text with no margin and a custom small text -->
       </div>
-      <a href="https://github.com/NerdTech-aut/cdv" class="text-decoration-none text-secondary cursor-pointer" target="_blank"> <!-- link with no text decoration, gray text and default cursor override -->
+      <a href="https://github.com/NerdTech-aut/Cell-Data-Viewer" class="text-decoration-none text-secondary cursor-pointer" target="_blank"> <!-- link with no text decoration, gray text and default cursor override -->
         <span><i class="bi bi-file-earmark-code"></i> <!-- bootstrap code icon --> GitHub</span>
       </a>
     </div>
@@ -112,11 +112,11 @@
           <div id="filtersCardBody" class="card-body collapse show"> <!-- card body which is collapsable but not collapsed on load -->
             <h5 class="card-title mb-3 d-none d-md-block">Data & Filters</h5>  <!-- title of the card with 1rem margin bottom and only visible for screen-width >= 768px -->
             <div class="mb-3"> <!-- element with 1rem margin bottom -->
-              <label for="csvFile" class="form-label text-secondary small-text text-uppercase">Select CSV (CellMapper & G-MoN Pro)</label> <!-- styled label for the CSV file picker button with a lighter text color, smaller text size and uppercase text-->
+              <label for="csvFile" class="form-label text-secondary small-text text-uppercase">Select CSV (CellMapper, G-MoN Pro & Tower Collector)</label> <!-- styled label for the CSV file picker button with a lighter text color, smaller text size and uppercase text-->
               <input class="form-control bg-transparent text-secondary border-secondary" type="file" id="csvFile" accept=".csv" autocomplete="off"/> <!-- styled file picker button with a transparent background and light text -->
             </div>
             <div class="mb-3 d-flex justify-content-between align-items-center"> <!-- element with 1rem margin bottom which is a flexbox which pushes the two items inside apart and vertically centers the items -->
-              <a id="btnHelp" class="btn btn-sm btn-outline-info" href="https://github.com/NerdTech-aut/cdv?tab=readme-ov-file#faq" target="_blank">Help</a> <!-- link which is styled as a compact outlined info button -->
+              <a id="btnHelp" class="btn btn-sm btn-outline-info" href="https://github.com/NerdTech-aut/Cell-Data-Viewer?tab=readme-ov-file#faq" target="_blank">Help</a> <!-- link which is styled as a compact outlined info button -->
               <span class="badge badge-pill text-bg-secondary py-2 small-text cursor-default"> <!-- points counter as a badge pill with gray secondary background, 0.5rem margin top and bottom and custom font size as well as a cursor type override to default -->
                 <span id="visibleCount">0</span> / <span id="totalCount">0</span> points
               </span>
@@ -729,7 +729,9 @@
 
     const headersCM = ['Latitude', 'Longitude', 'Altitude', 'MCC', 'MNC', 'LAC', 'Cell', 'Signal', 'Type', 'Subtype', 'ARFCN', 'PCI'];
     const headersGMP = ['PLMN', 'SYSTEM', 'XCI', 'xNBID', 'LOCAL_CID', 'LAC/TAC', 'PCI/PSC/BSIC', 'ARFCN', 'BAND', 'RSSI', 'RSRP/RSCP', 'RSRQ/ECIO', 'SNR', 'CQI', 'TA', 'DISTANCE', 'DELTA_AZI', 'LAT', 'LON', 'SPEED', 'GPS_ACCURACY', 'UL', 'DL', 'BANDWIDTH', 'BANDWIDTHS', 'CA', 'NR_STATE', 'NARFCN', 'NR_BAND', 'NR_PCI', 'NR_SS_RSRP', 'NR_SS_RSRQ', 'NR_SS_SINR', 'NR_CSI_RSRP', 'NR_CSI_RSRQ', 'NR_CSI_SINR', 'CLF_LABEL', 'CLF_LOC', 'CLF_DESC', 'DATE', 'TIME', 'ROAMING']
-    const headersGMPOptimized = ['PLMN', 'SYSTEM', 'Cell', 'NB', 'LOCAL_CID', 'LAC', 'PCI', 'ARFCN', 'Band', 'RSSI', 'Signal', 'RSRQ', 'SNR', 'CQI', 'TA', 'DISTANCE', 'DELTA_AZI', 'Latitude', 'Longitude', 'SPEED', 'GPS_ACCURACY', 'UL', 'DL', 'BANDWIDTH', 'BANDWIDTHS', 'CA', 'NR_STATE', 'NARFCN', 'NR_BAND', 'NR_PCI', 'NR_SS_RSRP', 'NR_SS_RSRQ', 'NR_SS_SINR', 'NR_CSI_RSRP', 'NR_CSI_RSRQ', 'NR_CSI_SINR', 'CLF_LABEL', 'CLF_LOC', 'CLF_DESC', 'DATE', 'TIME', 'ROAMING']
+    const headersGMPOptimized = ['PLMN', 'SYSTEM', 'Cell', 'NB', 'LOCAL_CID', 'LAC', 'PCI', 'ARFCN', 'Band', 'RSSI', 'Signal', 'RSRQ', 'SNR', 'CQI', 'TA', 'DISTANCE', 'DELTA_AZI', 'Latitude', 'Longitude', 'SPEED', 'Accuracy', 'UL', 'DL', 'BANDWIDTH', 'Bandwidths', 'CA', 'NR_STATE', 'NARFCN', 'NR_BAND', 'NR_PCI', 'NR_SS_RSRP', 'NR_SS_RSRQ', 'NR_SS_SINR', 'NR_CSI_RSRP', 'NR_CSI_RSRQ', 'NR_CSI_SINR', 'CLF_LABEL', 'CLF_LOC', 'CLF_DESC', 'DATE', 'TIME', 'ROAMING']
+    const headersTC = ['mcc', 'mnc', 'lac', 'cell_id', 'short_cell_id', 'rnc', 'psc', 'asu', 'dbm', 'ta', 'lat', 'lon', 'accuracy', 'speed', 'bearing', 'altitude', 'measured_at', 'net_type', 'neighboring', 'discovered_at', 'device', 'rsrp', 'rsrq', 'rssi', 'rssnr', 'cqi', 'rscp', 'csi_rsrp', 'csi_rsrq', 'csi_sinr', 'ss_rsrp', 'ss_rsrq', 'ss_sinr', 'cdma_dbm', 'cdma_ecio', 'evdo_dbm', 'evdo_ecio', 'evdo_snr', 'ec_no', 'arfcn']
+    const headersTCOptimized = ['MCC', 'MNC', 'LAC', 'Cell', 'short_cell_id', 'rnc', 'PCI', 'asu', 'Signal', 'ta', 'Latitude', 'Longitude', 'Accuracy', 'speed', 'bearing', 'Altitude', 'Timestamp', 'Type', 'neighboring', 'discovered_at', 'device', 'rsrp', 'rsrq', 'rssi', 'rssnr', 'cqi', 'rscp', 'csi_rsrp', 'csi_rsrq', 'csi_sinr', 'ss_rsrp', 'ss_rsrq', 'ss_sinr', 'cdma_dbm', 'cdma_ecio', 'evdo_dbm', 'evdo_ecio', 'evdo_snr', 'ec_no', 'ARFCN']
     const mapping = { 'LTE-LTE': 256, 'NR-NSA': 0, 'NR-SA': 16384 };
     const invalidValues = ["-1", "0", "1", "", "9223372036854775807", "000000"];
 
@@ -864,7 +866,7 @@
 
       if (lines.length == 0) return;
 
-      if (lines[0].split(",").length == headersCM.length) {
+      if (lines[0].split(",").length == headersCM.length) { //for CellMapper
         //iterate over all the lines
         lines.forEach(line => {
           //split the line at the separator
@@ -919,8 +921,8 @@
           //add the finished row dict/json to the rows list
           rows.push(row);
         });
-      } else if (lines[0].split(";").length == headersGMP.length && lines[0].split(";").every(h => headersGMP.includes(h))) {
-        //iterate over all the lines
+      } else if (lines[0].split(";").length == headersGMP.length && lines[0].split(";").every(h => headersGMP.includes(h))) { //for G-MoN Pro
+        //iterate over all the lines except the first one
         lines.slice(1).forEach(line => {
           //split the line at the separator
           const cols = line.split(";");
@@ -940,7 +942,7 @@
           if (row.Latitude == "48.257915" && row.Longitude == "16.337943") console.log(row);
 
           //update PLMN entry if value is invalid
-          row.PLMN = (!invalidValues.includes(row.PLMN)) ? row.PLMN : "Unknown";
+          row.PLMN = (!invalidValues.includes(row.PLMN)) ? row.PLMN.substring(0, 3) + "-" + row.PLMN.substring(3) : "Unknown";
           //update LAC entry if value is invalid
           row.LAC = (!invalidValues.includes(row.LAC)) ? row.LAC : "Unknown";
           //update Cell entry if value is invalid
@@ -955,11 +957,20 @@
           row.PCI = (!invalidValues.includes(row.PCI)) ? row.PCI : "Unknown";
           //update Altitude entry if value is invalid
           row.Altitude = (!invalidValues.includes(row.Altitude)) ? row.Altitude : "Unknown";
+          //update Bandwidths entry if value is invalid
+          row.Bandwidths = (!invalidValues.includes(row.Bandwidths)) ? row.Bandwidths : "Unknown";
+
+          //create new MCC and MNC entries by splitting the PLMN entry at the separator when PLMN value is not invalid
+          row.MCC = row.PLMN.split("-")[0] ?? "Unknown";
+          row.MNC = row.PLMN.split("-")[1] ?? "Unknown";
 
           //create a new type entry based on the System entry
           row.Type = row.SYSTEM === "4" ? "LTE" : row.SYSTEM === "5" ? "NR" : "Unknown";
           row.TypeSubtype = row.SYSTEM === "4" ? `${row.Type}-LTE` : row.SYSTEM === "5" ? `${row.Type}-SA` : "Unknown";
+          //skip the rest of the run if type is not LTE or NR
+          if (row.TypeSubtype.includes(["LTE", "NR"])) return;
 
+          //update the Band entry by removing the leading frequency number
           row.Band = row.Band.split(" ")[1] ?? "Unknown";
 
           //create a new Frequency entry with the calculateFrequency function 
@@ -967,11 +978,63 @@
           //create a new Color entry with the determineMarkerColor function
           row.Color = determineMarkerColor(row.Signal);
 
+          //create a new Timestamp entry by combining the Date and Time entries
+          row.Timestamp = `${row.DATE} ${row.TIME}`
+
+          //add the finished row dict/json to the rows list
+          rows.push(row);
+        });
+      } else if (lines[0].split(",").length == headersTC.length) { //for Tower Collector
+        //iterate over all the lines except the first one
+        lines.slice(1).forEach(line => {
+          //split the line at the separator
+          const cols = line.split(",");
+          //when the line does not have the expected amount of columns skip the rest of the run
+          if (cols.length !== headersTC.length) return;
+
+          //construct the row as a dictionary/json
+          const row = {};
+
+          //iterate over the headers and set a new key value pair for the current header and the column value at the current header index
+          headersTCOptimized.forEach((h, idx) => {
+            row[h] = cols[idx]
+          });
+
+          //create new PLMN entry based von MCC and MNC when these values are not invalid
+          row.PLMN = (!invalidValues.includes(row.MCC) || !invalidValues.includes(row.MNC)) ? `${row.MCC}-${row.MNC}` : "Unknown";
+          
+          //create new TypeSubtype entry based on Type when this value is not invalid
+          row.TypeSubtype = row.Type === "LTE" ? `${row.Type}-LTE` : row.Type === "NR" ? `${row.Type}-SA` : "Unknown";
+          //skip the rest of the run if type is not LTE or NR
+          if (row.TypeSubtype.includes(["LTE", "NR"])) return;
+          
+          //update LAC entry if value is invalid
+          row.LAC = (!invalidValues.includes(row.LAC)) ? row.LAC : "Unknown";
+          //update Cell entry if value is invalid
+          row.Cell = (!invalidValues.includes(row.Cell)) ? row.Cell : "Unknown";
+          //update PCI entry if value is invalid
+          row.PCI = (!invalidValues.includes(row.PCI)) ? row.PCI : "Unknown";
+          //update ARFCN entry if value is invalid
+          row.ARFCN = (!invalidValues.includes(row.ARFCN)) ? row.ARFCN : "Unknown";
+          //get the divisor for the calculation of the NB based on TypeSubtype
+          const divisor = mapping[row.TypeSubtype] ?? 1;
+          //create a new NB entry by first convert and check if the Cell-ID is a finite number and then calculate the NB by converting the Cell-ID to a number, divide it by the divisor, and turning it into a while number
+          row.NB = Number.isFinite(Number(row.Cell)) && divisor !== 0 ? String(Math.trunc(Number(row.Cell) / divisor)) : "Unknown";
+          
+          //create a new Band entry with the getBandNumber function
+          row.Band = getBandNumber(row.ARFCN, row.Type);
+          //create a new Frequency entry with the calculateFrequency function 
+          row.Frequency = calculateFrequency(row.ARFCN, row.Type);
+          //create a new Color entry with the determineMarkerColor function
+          row.Color = determineMarkerColor(row.Signal);
+          
+          //update the Timestamp entry by aligning format with that of G-MoN Pro
+          row.Timestamp = row.Timestamp.replace("T", " ").replace("Z", "").replaceAll("-", "/").replaceAll("\"", "");
+
           //add the finished row dict/json to the rows list
           rows.push(row);
         });
       }
-
       console.log(`Parsed ${rows.length} rows from CSV`);
       return rows;
     }
@@ -1406,7 +1469,7 @@
             <th scope="row">Signal</th>    <td>${p.Signal} dBm</td>
           </tr>
           <tr>
-            <th scope="row">${p.Altitude ? "Altitude" : p.GPS_ACCURACY ? "Accuracy": ""}</th>  <td>${p.Altitude ? p.Altitude: p.GPS_ACCURACY ? "+/- " + p.GPS_ACCURACY : ""} meters</td>
+            <th scope="row">${p.Altitude ? "Altitude" : p.Bandwidths ? "Bandwidths": ""}</th>  <td>${p.Altitude ? p.Altitude + " meters": p.Bandwidths ? p.Bandwidths + " MHz": ""}</td>
           </tr>
           <tr>
             <th scope="row">Latitude</th>  <td>${p.Latitude}</td>
@@ -1414,6 +1477,10 @@
           <tr>
             <th scope="row">Longitude</th> <td>${p.Longitude}</td>
           </tr>
+          ${p.Timestamp ? 
+          `<tr>
+            <th scope="row">Timestamp</th> <td>${p.Timestamp}</td>
+          </tr>` : ""}
           <tr>
             <th colspan="2"><a href="https://www.google.com/maps/search/${p.Latitude},+${p.Longitude}" target="_blank">View on Google Maps</a></th>
           </tr>

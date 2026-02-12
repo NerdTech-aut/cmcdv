@@ -2,7 +2,7 @@
 ## About
 This web tool allows anyone to make more out of the CSV files collected by the CellMapper and G-MoN Pro applications.
 
-It is currently available at: [https://nerdtech-aut.github.io/cmcdv/cmcdv.html](https://nerdtech-aut.github.io/cmcdv/cmcdv.html)
+It is currently available at: [https://cdv.nerdtech.one](https://cdv.nerdtech.one)
 
 ![Cell Data Viewer main screenshot](/assets/documentation/imgs/Screenshot-Main.png)
 
@@ -28,29 +28,63 @@ All processing of the data happens on your device in the browser. The CSV files 
 
 ## FAQ
 ### I use CellMapper - How can I save the points I collect to a CSV file?
-1. Via the hamburger menu in the top left of the application (three horizontal lines) navigate to the settings of the app.
-2. Enable the output to CSV file option which can be found in the Main Settings section.
-3. Use the record function of the app to collect data points. For each day you record data points a new CSV file will be created with the collected data points. The CSV file will be updated with new data points as you collect them.
+1. Open the hamburger menu in the top left of the app (three horizontal lines).
+2. Select the "Settings" option to navigate to the settings of the app.
+3. Enable the output to CSV file option which can be found in the Main Settings section.
+4. Use the record function of the app to collect data points. For each day you record data points a new CSV file will be created with the collected data points. The CSV file will be updated with new data points as you collect them.
 
 ![CM CSV SBS](/assets/documentation/imgs/CM-CSV-SBS.png)
 
 ### I use G-MoN Pro - How can I save the points I collect to a CSV file?
-1. Use the record function of the app to collect data points. Each time you start a new recording session a new CSV file will be created with the collected data points. The CSV file will be updated with new data points as you collect them.
+Use the record function of the app to collect data points. Each time you start a new recording session a new CSV file will be created with the collected data points. The CSV file will be updated with new data points as you collect them.
+
+### I use Tower Collector - How can I save the points I collect to a CSV file?
+Use the record function of the app to collect data points. 
+
+After the recording you can export the collected data points to a CSV file following these steps:
+1. Open the three dots menu in the top right corner of the app.
+2. In the three dots menu select the "Export" option.
+3. In the preferences menu tick the "CSV" option checkbox.
+4. Click on the "Export" button.
+5. At this point the CSV file is exported and can be opened in the web tool through the file picker of your Android device. But in the following pop-up you can select to just keep the CSV file on the device or to directly share it to another app or device. Depending on your selection the "Keep" button changes to a "Share" button.
+
+![TC Export SBS](/assets/documentation/imgs/TC-Export-SBS.png)
 
 ### I use CellMapper - Where do I find the CSV files?
 The CSV files can be found in the following folder: Internal Storage -> Android -> data -> cellmapper.net.cellmapper -> files
 
 > [!IMPORTANT]
-> Please note that if you use the web tool directly on an Android device the **CSV files can't be opened directly from this folder via the file picker**. This limitation is due to the security aspect that apps shouldn't be able to access storage regions of other apps. The only exception is the build in Android Files application (com.google.android.documentsui) when it's opened from the launcher (home screen & app menu) or via an activity launcher. This should not be confused with the [Files by Google](https://play.google.com/store/apps/details?id=com.google.android.apps.nbu.files) application or any other manufacturer provided files application. With this Android Files application, it's possible to copy the CSV files in the above mentioned folder to another folder like Downloads, Documents or any other folder outside of the Android folder. Then the CSV files can be opened from the web tool via the file picker. If your Android device doesn't have a shortcut to the Android Files application by default it is possible to add one either via the [Files shortcut app](https://play.google.com/store/apps/details?id=com.marc.files) from [Marc apps & software](https://marc-apps.nl/) / [Marc-JB](https://github.com/Marc-JB) (easy option) or via an activity launcher app such as [Activity Launcher](https://play.google.com/store/apps/details?id=de.szalkowski.activitylauncher) by [Adam M. Szalkowski](https://github.com/butzist) and add a shortcut to the com.android.documentsui.files.FilesActivity activity to the home screen (advanced option).<br>  
+> Please note that if you use the web tool directly on an Android device the **CSV files can't be opened directly from this folder via the file picker**. This limitation is due to the security aspect that apps shouldn't be able to access storage regions of other apps. The only exception is the build in Android Files application (com.google.android.documentsui) when it's opened from the launcher (home screen & app menu) or via an activity launcher. This should not be confused with the [Files by Google](https://play.google.com/store/apps/details?id=com.google.android.apps.nbu.files) application or any other manufacturer provided files application. With this Android Files application, it's possible to copy the CSV files in the above mentioned folder to another folder like Downloads, Documents or any other folder outside of the Android folder. Then the CSV files can be opened from the web tool via the file picker. If your Android device doesn't have a shortcut to the Android Files application by default it is possible to add one either via the [Files shortcut app](https://play.google.com/store/apps/details?id=com.marc.files) from [Marc apps & software](https://marc-apps.nl/) / [Marc-JB](https://github.com/Marc-JB) (easy option) or via an activity launcher app such as [Activity Launcher](https://play.google.com/store/apps/details?id=de.szalkowski.activitylauncher) by [Adam M. Szalkowski](https://github.com/butzist) and add a shortcut to the com.android.documentsui.files.FilesActivity activity to the home screen (advanced option).
+> 
 > If you want to use the web tool on a computer you can connect your Android device via a USB cable to access the CSV files. Alternatively, you can share the CSV files to a computer from the Android Files application described above.
 
 ### I use G-MoN Pro - Where do I find the CSV files?
 The CSV files can be found in the following folder: Internal Storage -> Android -> data -> de.carknue.gmonpro -> files
 
 > [!IMPORTANT]
-> Please note that if you use the web tool directly on an Android device the **CSV files can't be opened directly from this folder via the file picker**. This limitation is due to the security aspect that apps shouldn't be able to access storage regions of other apps. The only exception is the build in Android Files application (com.google.android.documentsui) when it's opened from the launcher (home screen & app menu) or via an activity launcher. This should not be confused with the [Files by Google](https://play.google.com/store/apps/details?id=com.google.android.apps.nbu.files) application or any other manufacturer provided files application. With this Android Files application, it's possible to copy the CSV files in the above mentioned folder to another folder like Downloads, Documents or any other folder outside of the Android folder. Then the CSV files can be opened from the web tool via the file picker. If your Android device doesn't have a shortcut to the Android Files application by default it is possible to add one either via the [Files shortcut app](https://play.google.com/store/apps/details?id=com.marc.files) from [Marc apps & software](https://marc-apps.nl/) / [Marc-JB](https://github.com/Marc-JB) (easy option) or via an activity launcher app such as [Activity Launcher](https://play.google.com/store/apps/details?id=de.szalkowski.activitylauncher) by [Adam M. Szalkowski](https://github.com/butzist) and add a shortcut to the com.android.documentsui.files.FilesActivity activity to the home screen (advanced option).<br>  
-> An additional path on G-MoN Pro is that you can find the CSV files in the G-MoN Pro app. Open the three dot menu in the top right corner of the app and select the "File Manager" option. Here you can share the CSV files to other apps and devices. For example you can share to a network/cloud storage location. You might be able to open the CSV files from a network/cloud storage location via the file picker on your Android device depending on the app you use for the network/cloud storage location.
+> Please note that if you use the web tool directly on an Android device the **CSV files can't be opened directly from this folder via the file picker**. This limitation is due to the security aspect that apps shouldn't be able to access storage regions of other apps. The only exception is the build in Android Files application (com.google.android.documentsui) when it's opened from the launcher (home screen & app menu) or via an activity launcher. This should not be confused with the [Files by Google](https://play.google.com/store/apps/details?id=com.google.android.apps.nbu.files) application or any other manufacturer provided files application. With this Android Files application, it's possible to copy the CSV files in the above mentioned folder to another folder like Downloads, Documents or any other folder outside of the Android folder. Then the CSV files can be opened from the web tool via the file picker. If your Android device doesn't have a shortcut to the Android Files application by default it is possible to add one either via the [Files shortcut app](https://play.google.com/store/apps/details?id=com.marc.files) from [Marc apps & software](https://marc-apps.nl/) / [Marc-JB](https://github.com/Marc-JB) (easy option) or via an activity launcher app such as [Activity Launcher](https://play.google.com/store/apps/details?id=de.szalkowski.activitylauncher) by [Adam M. Szalkowski](https://github.com/butzist) and add a shortcut to the com.android.documentsui.files.FilesActivity activity to the home screen (advanced option).
+> 
+> An additional path for G-MoN Pro is that you can find the CSV files in the app by following these steps: 
+> 1. Open the three dot menu in the top right corner of the app
+> 2. In the three dots menu select the "File Manager" option.
+> 3. In the file manager you can see, select and share the CSV files to other apps and devices. For example you can share them to a network/cloud storage location.
+> 
+> You might be able to open the CSV files from a network/cloud storage location via the file picker on your Android device depending on the app you use for the network/cloud storage location.
+> 
 > If you want to use the web tool on a computer you can connect your Android device via a USB cable to access the CSV files. Alternatively, you can share the CSV files to a computer from the G-MoN Pro application or the Android Files application described above.
+
+### I use Tower Collector - Where do I find the CSV files?
+When you use the Export function for the first time need to create and/or select a folder in which the app will store the export files every time you use the export function. 
+
+If you have trouble finding that folder again follow these steps to rediscover the folder you have selected for the export files:
+1. Open the three dots menu in the top right corner of the app.
+2. In the three dots menu select the "Preferences" option. 
+3. In the preferences menu select the "General" option.
+4. Under general select the "Change storage location" option.
+5. In the pop-up select the "Proceed" option.
+6. You can now see the selected folder and the path to that folder in the folder picker.
+
+![TC Folder Rediscover](/assets/documentation/imgs/TC-Folder-Rediscover.png)
 
 ### What is the meaning of the different colors of the data points on the map?
 The colors of the data points represent the signal strength (RSRP) of the collected data points. If the signal strength:
