@@ -124,7 +124,7 @@
             <div class="row g-2 mb-3"> <!-- row with a gutter between columns of 0.75rem and 1rem margin bottom -->
               <div class="col-6 mt-0"> <!-- element which spans 6/12 columns and no margin top -->
                 <label class="form-label text-secondary small-text text-uppercase">PLMN</label> <!-- styled label with a lighter text color, smaller text size and uppercase text -->
-                <div class="dropdown"> <!-- styled dropdown -->
+                <div class="dropdown" id="filterPlmn"> <!-- styled dropdown -->
                   <button class="btn btn-outline-secondary dropdown-toggle w-100 text-start" type="button" id="filterPlmnBtn" data-bs-toggle="dropdown" aria-expanded="false"> <!-- button which is styled as a outlined secondary button with the full width of the parent element, left aligned text and a dropdown arrow-->
                     <span id="filterPlmnSelected">All</span> <!-- default button text -->
                   </button>
@@ -141,7 +141,7 @@
               </div>
               <div class="col-6 mt-0"> <!-- element which spans 6/12 columns and no margin top -->
                 <label class="form-label text-secondary small-text text-uppercase">Type</label> <!-- styled label with a lighter text color, smaller text size and uppercase text -->
-                <div class="dropdown"> <!-- styled dropdown -->
+                <div class="dropdown" id="filterType"> <!-- styled dropdown -->
                   <button class="btn btn-outline-secondary dropdown-toggle w-100 text-start" type="button" id="filterTypeBtn" data-bs-toggle="dropdown" aria-expanded="false"> <!-- button which is styled as a outlined secondary button with the full width of the parent element, left aligned text and a dropdown arrow-->
                     <span id="filterTypeSelected">All</span> <!-- default button text -->
                   </button>
@@ -160,7 +160,7 @@
             <div class="row g-2 mb-3"> <!-- row with a gutter between columns of 0.75rem and 1rem margin bottom -->
               <div class="col-6 mt-0"> <!-- element which spans 6/12 columns and no margin top -->
                 <label class="form-label text-secondary small-text text-uppercase">Band</label> <!-- styled label with a lighter text color, smaller text size and uppercase text -->
-                <div class="dropdown"> <!-- styled dropdown -->
+                <div class="dropdown" id="filterBand"> <!-- styled dropdown -->
                   <button class="btn btn-outline-secondary dropdown-toggle w-100 text-start" type="button" id="filterBandBtn" data-bs-toggle="dropdown" aria-expanded="false"> <!-- button which is styled as a outlined secondary button with the full width of the parent element, left aligned text and a dropdown arrow-->
                     <span id="filterBandSelected">All</span> <!-- default button text -->
                   </button>
@@ -177,7 +177,7 @@
               </div>
               <div class="col-6 mt-0"> <!-- element which spans 6/12 columns and no margin top -->
                 <label class="form-label text-secondary small-text text-uppercase">Frequency</label> <!-- styled label with a lighter text color, smaller text size and uppercase text -->
-                <div class="dropdown"> <!-- styled dropdown -->
+                <div class="dropdown" id="filterFrequency"> <!-- styled dropdown -->
                   <button class="btn btn-outline-secondary dropdown-toggle w-100 text-start" type="button" id="filterFrequencyBtn" data-bs-toggle="dropdown" aria-expanded="false"> <!-- button which is styled as a outlined secondary button with the full width of the parent element, left aligned text and a dropdown arrow-->
                     <span id="filterFrequencySelected">All</span> <!-- default button text -->
                   </button>
@@ -196,7 +196,7 @@
             <div class="row g-2 mb-3"> <!-- row with a gutter between columns of 0.75rem and 1rem margin bottom -->
               <div class="col-6 mt-0"> <!-- element which spans 6/12 columns and no margin top -->
                 <label class="form-label text-secondary small-text text-uppercase" >NB</label> <!-- styled label with a lighter text color, smaller text size and uppercase text -->
-                <div class="dropdown"> <!-- styled dropdown -->
+                <div class="dropdown" id="filterNb"> <!-- styled dropdown -->
                   <button class="btn btn-outline-secondary dropdown-toggle w-100 text-start" type="button" id="filterNbBtn" data-bs-toggle="dropdown" aria-expanded="false"> <!-- button which is styled as a outlined secondary button with the full width of the parent element, left aligned text and a dropdown arrow-->
                     <span id="filterNbSelected">All</span> <!-- default button text -->
                   </button>
@@ -213,7 +213,7 @@
               </div>
               <div class="col-6 mt-0"> <!-- element which spans 6/12 columns and no margin top -->
                 <label class="form-label text-secondary small-text text-uppercase">Cell</label> <!-- styled label with a lighter text color, smaller text size and uppercase text -->
-                <div class="dropdown"> <!-- styled dropdown -->
+                <div class="dropdown" id="filterCell"> <!-- styled dropdown -->
                   <button class="btn btn-outline-secondary dropdown-toggle w-100 text-start" type="button" id="filterCellBtn" data-bs-toggle="dropdown" aria-expanded="false"> <!-- button which is styled as a outlined secondary button with the full width of the parent element, left aligned text and a dropdown arrow-->
                     <span id="filterCellSelected">All</span> <!-- default button text -->
                   </button>
@@ -723,6 +723,8 @@
     const btnSaveMap = document.getElementById('btnSaveMap');
     const btnDownload = document.getElementById('btnDownload');
 
+    const dropdowns = document.querySelectorAll('.dropdown');
+
     const emptyMapModel = new bootstrap.Modal(document.getElementById('emptyMapModel'));
     const successfulMapModelText = document.getElementById('successfulMapModelText')
     const successfulMapModel = new bootstrap.Modal(document.getElementById('successfulMapModel'));
@@ -937,9 +939,8 @@
             row[h] = cols[idx]
           });
           
+          row.Signal = isNaN(parseFloat(row.Signal)) && !isNaN(parseFloat(row.NR_SS_RSRP)) ? row.NR_SS_RSRP : row.Signal;
           if (invalidValues.includes(row.Signal)) return;
-
-          if (row.Latitude == "48.257915" && row.Longitude == "16.337943") console.log(row);
 
           //update PLMN entry if value is invalid
           row.PLMN = (!invalidValues.includes(row.PLMN)) ? row.PLMN.substring(0, 3) + "-" + row.PLMN.substring(3) : "Unknown";
@@ -1351,67 +1352,6 @@
       search.value = '';
       //set the no results item to invisible
       noResults.classList.replace('d-block', 'd-none');
-      //remove the existing event listener
-      search.removeEventListener('input', search._customSearchHandler);
-      //create a custom search handler for the current search box
-      search._customSearchHandler = function() {
-        //get the current search value without starting or ending spaces in lower case
-        const q = this.value.trim().toLowerCase();
-        let hasResults = false;
-        //iterate over all list elements of the dropdown
-        ul.querySelectorAll('a.dropdown-item').forEach(a => {
-          //always keep the app entry visible
-          if (a.dataset.value === "") {
-            //skip the rest of the run
-            return;
-          }
-          //get the value of the current dropdown list element in lower case
-          const txt = a.textContent.toLowerCase();
-          //check whether the value of the current dropdown list element includes the search value
-          if (txt.includes(q)) {
-            //set matching dropdown list elements to visible
-            a.classList.replace('d-none', 'd-block');
-            hasResults = true;
-          } else {
-            //set not matching dropdown list elements to invisible
-            a.classList.replace('d-block', 'd-none');
-          }
-        });
-        //when there are no results set the no results item to visible
-        if (hasResults) {
-          noResults.classList.replace('d-block', 'd-none')
-        } else {
-          noResults.classList.replace('d-none', 'd-block')
-        }
-      };
-      //register the event handler
-      search.addEventListener('input', search._customSearchHandler);
-      //to prevent closing the dropdown when clicking search box
-      search.addEventListener('click', e => e.stopPropagation());
-
-      //remove the existing event listener from the dropdown button
-      btn.removeEventListener('shown.bs.dropdown', btn._customShownHandler);
-      //create a custom event handler to focus the search input when the dropdown is opened
-      btn._customShownHandler = function() {
-        //delay the focusing by 10ms to ensure that he dropdown is open
-        setTimeout(() => {
-          try {
-            //focus on the search box
-            search.focus();
-            //select the text in the search box if the select function exists
-            if (typeof search.select === 'function') search.select();
-          } catch (err) {
-            //ignore focus errors
-          }
-        }, 10);
-      };
-      //register the event listener
-      btn.addEventListener('shown.bs.dropdown', btn._customShownHandler);
-
-      //to prevent closing the dropdown when clicking on the no results item
-      noResults.removeEventListener('click', noResults._customClickHandler);
-      noResults._customClickHandler = e => e.stopPropagation();
-      noResults.addEventListener('click', noResults._customClickHandler);
     }
 
     function applyFilters() {
@@ -1518,6 +1458,86 @@
         map.fitBounds(bounds.pad(0.2), { maxZoom: 19 });
       }
     }
+
+    dropdowns.forEach(dropdown => {
+      const ul = document.getElementById(dropdown.id + "UL");
+      const search = document.getElementById(dropdown.id + "Search");
+      const selectedSpan = document.getElementById(dropdown.id + "Selected");
+      const noResults = document.getElementById(dropdown.id + "NoResults");
+      const btn = document.getElementById(dropdown.id + "Btn");
+
+      //create a custom search handler for the current search box
+      search._customSearchHandler = function() {
+        //get the current search value without starting or ending spaces in lower case
+        const q = this.value.trim().toLowerCase();
+        let hasResults = false;
+        //iterate over all list elements of the dropdown
+        ul.querySelectorAll('a.dropdown-item').forEach(a => {
+          //always keep the all entry visible
+          if (a.dataset.value === "") {
+            //skip the rest of the run
+            return;
+          }
+          //get the value of the current dropdown list element in lower case
+          const txt = a.textContent.toLowerCase();
+          //check whether the value of the current dropdown list element includes the search value
+          if (txt.includes(q)) {
+            //set matching dropdown list elements to visible
+            a.classList.replace('d-none', 'd-block');
+            hasResults = true;
+          } else {
+            //set not matching dropdown list elements to invisible
+            a.classList.replace('d-block', 'd-none');
+          }
+        });
+        //when there are no results set the no results item to visible
+        if (hasResults) {
+          noResults.classList.replace('d-block', 'd-none')
+        } else {
+          noResults.classList.replace('d-none', 'd-block')
+        }
+      };
+      //register the event handler
+      search.addEventListener('input', search._customSearchHandler);
+
+      //create a custom event handler to focus the search input when the dropdown is opened
+      btn._customShownHandler = function() {
+        //delay the focusing by 10ms to ensure that he dropdown is open
+        setTimeout(() => {
+          try {
+            //focus on the search box
+            search.focus();
+            //select the text in the search box if the select function exists
+            if (typeof search.select === 'function') search.select();
+          } catch (err) {
+            //ignore focus errors
+          }
+        }, 10);
+      };
+      //register the event listener
+      btn.addEventListener('shown.bs.dropdown', btn._customShownHandler);
+
+      //to prevent closing the dropdown when clicking on the no results item
+      noResults.removeEventListener('click', noResults._customClickHandler);
+      noResults._customClickHandler = e => e.stopPropagation();
+      noResults.addEventListener('click', noResults._customClickHandler);
+
+      //create a custom keydown handler for the current search box
+      search._customKeydownHandler = function(e) {
+        //when the enter key is pressed
+        if (e.key === 'Enter') {
+          //get all visible dropdown items with a valid value
+          const visibleItems = Array.from(ul.querySelectorAll('a.dropdown-item[data-value]')).filter(a => a.dataset.value !== "" && a.classList.contains('d-block'));
+          //when there is only one valid visible dropdown item
+          if (visibleItems.length === 1) {
+            //click on the sole visible item to select it
+            visibleItems[0].click();
+          }
+        }
+      };
+      //register the event handler
+      search.addEventListener('keydown', search._customKeydownHandler);
+    });
 
     btnSaveMap.addEventListener('click', async event => {
       try {
